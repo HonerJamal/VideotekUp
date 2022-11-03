@@ -17,7 +17,7 @@ class Videotek
                 ListMovies();
                 break;
             case 1:
-                RentMovies();
+                RentStatus();
                 break;
             case 2:
                 ShowMember();
@@ -48,11 +48,11 @@ class Videotek
             }
          }
     }
-    private void RentMovies()
+    private void RentStatus()
     {
         using (var connection = new MySqlConnection("Server=localhost;Database=videotek;Uid=root;"))
         {
-            var order = connection.Query<Order>("SELECT id, user_id, movie_id, rent_date (dd/mm/yy) FROM Orders").ToList();
+            var order = connection.Query<Order>("SELECT id, user_id, movie_id, rent_date FROM Orders").ToList();
             foreach (Order o in order)
             {
                 Console.WriteLine("ID: " + o.id + ", " + "User ID: "+ o.user_id + ", " + "Movie ID: " + o.movie_id + ", " + "Rented at: " + o.rent_date);
